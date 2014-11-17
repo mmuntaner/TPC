@@ -1,10 +1,17 @@
-
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 
+struct images
+{
+  int w;
+  int h;
+  char* name;
+  u_char* dat;
+};
+  
 
 //============================================================================
 //                           Function declarations
@@ -26,6 +33,10 @@ void ppm_desaturate(u_char* image, int width, int height);
 void ppm_shrink(u_char** image, int *width, int *height, int factor);
 
 
+struct images createimages(int width, int height, u_char* data, char* name_file, struct images image);
+
+
+
 
 //============================================================================
 //                                  Main
@@ -35,6 +46,8 @@ int main(int argc, char* argv[])
   //--------------------------------------------------------------------------
   // Read file "gargouille.ppm" into image (width and height)
   //--------------------------------------------------------------------------
+
+  
   u_char* image = NULL;
   int width;
   int height;
@@ -220,6 +233,17 @@ void ppm_shrink(u_char** image, int *width, int *height, int factor)
   free(*image);
   *image = new_image;
 }
+
+
+struct images createimages(int width, int height, u_char* data, char* name_file, struct images image)
+{
+  image.w=width;
+  image.h=height;
+  image.dat=(u_char*)malloc(3*width*height*sizeof(u_char));
+  image.name=name_file;
+}
+
+  
 
 
 
