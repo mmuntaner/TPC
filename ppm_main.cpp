@@ -40,7 +40,7 @@ int main(int argc, char* argv[])
   images imagebw; 
   imagebw.w=image1.w;
   imagebw.h=image1.h;
-  imagebw.dat = (u_char*) malloc(3 *imagebw.w *imagebw.h * sizeof(u_char));
+  imagebw.dat = new u_char[3 *imagebw.w *imagebw.h];
   imagebw.name=fichier2;
 
 
@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
  
 
   // Free the desaturated image
-  free(imagebw.dat);
+  delete(imagebw.dat);
 
 
   //--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ int main(int argc, char* argv[])
   images image_small;
   image_small.w = image1.w;
   image_small.h = image1.h;
-  image_small.dat= (u_char*) malloc(3 *image_small.w *image_small.h * sizeof(u_char));
+  image_small.dat= new u_char[3 *image_small.w *image_small.h];
   memcpy(image_small.dat, image1.dat, 3 * image_small.w *image_small.h * sizeof(*image_small.dat));
 
   // Shrink image_small size 2-fold
@@ -80,7 +80,7 @@ int main(int argc, char* argv[])
 
 
   // Free the not yet freed images
-  free(image1.dat);
+  delete(image1.dat);
 
 
   return 0;
